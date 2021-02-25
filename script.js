@@ -49,7 +49,7 @@ const bitcoinPriceUrl = "https://api.coindesk.com/v1/bpi/currentprice.json";
 const priceElement = document.querySelector("h2");
 const timeElement = document.querySelector("p");
 const button = document.querySelector("button");
-const optionCoin = document.querySelector("select").value;
+const optionCoin = document.querySelector("select");
 
 const actualizarDatos = () => {
   fetch(bitcoinPriceUrl, {
@@ -73,18 +73,16 @@ const actualizarDatos = () => {
       otro tipo de moneda nos va a traer la informacion*/ 
 
       if(optionCoin === 'USD'){
-
         //Si la opcion del select es USD, traemos la informacion en dolares
         const USD_INFO = data.bpi.USD;
         priceElement.innerHTML = `${USD_INFO.code}${USD_INFO.symbol} ${USD_INFO.rate}`;
 
       } else if( optionCoin === 'GBP'){
-
         //Si la opcion del select GBP, traemos la informacion en libras esterlinas
         const GBP_INFO = data.bpi.GBP;
         priceElement.innerHTML = `${GBP_INFO.code}${GBP_INFO.symbol} ${GBP_INFO.rate}`;
-      } else {
 
+      } else {
         //Si la opcion del select es EUR, traemos la informacion en Euros
         const EUR_INFO = data.bpi.EUR;
         priceElement.innerHTML = `${EUR_INFO.code}${EUR_INFO.symbol} ${EUR_INFO.rate}`;
@@ -103,3 +101,4 @@ const actualizarDatos = () => {
 actualizarDatos();
 
 button.addEventListener("click", actualizarDatos);
+optionCoin.addEventListener('change', actualizarDatos);
